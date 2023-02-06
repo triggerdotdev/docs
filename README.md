@@ -1,30 +1,26 @@
-# Mintlify Starter Kit
+# Trigger.dev Documentation
 
-Click on `Use this template` to quickstarter your documentation setup with Mintlify. The starter kit contains examples including
-
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+This repository contains the documentation for [Trigger.dev](https://trigger.dev).
 
 ### 👩‍💻 Development
+
+If you wish to run this locally, follow the steps below.
 
 Run these from the root of the repository
 
 ```
-pnpm install --filter docs
+pnpm install
 ```
 
 ```
-pnpm run dev --filter docs
+pnpm run dev
 ```
 
 Go to http://localhost:3050
 
 ### 😎 Publishing Changes
 
-Changes will be deployed to production automatically after pushing to the default branch.
+Changes will be deployed to production automatically after pushing to the `main` branch.
 
 You can also preview changes using PRs, which generates a preview link of the docs.
 
