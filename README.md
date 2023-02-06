@@ -2,6 +2,8 @@
 
 This repository contains the documentation for [Trigger.dev](https://trigger.dev).
 
+View the live documentation at [docs.trigger.dev](https://docs.trigger.dev).
+
 ### 👩‍💻 Development
 
 If you wish to run this locally, follow the steps below.
