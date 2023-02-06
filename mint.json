@@ -54,7 +54,8 @@
         "getting-started",
         "get-help",
         "viewing-runs",
-        "changelog"
+        "changelog",
+        "roadmap"
       ]
     },
     {
@@ -110,9 +111,7 @@
             },
             {
               "group": "Resend.com",
-              "pages": [
-                "integrations/apis/resend/actions/send-email"
-              ]
+              "pages": ["integrations/apis/resend/actions/send-email"]
             },
             {
               "group": "WhatsApp",
@@ -120,9 +119,7 @@
                 "integrations/apis/whatsapp/index",
                 {
                   "group": "Events",
-                  "pages": [
-                    "integrations/apis/whatsapp/events/message"
-                  ]
+                  "pages": ["integrations/apis/whatsapp/events/message"]
                 },
                 {
                   "group": "Actions",
@@ -177,9 +174,7 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api-reference/events/sendEvent"
-      ]
+      "pages": ["api-reference/events/sendEvent"]
     },
     {
       "group": "Webhook Catalog",
