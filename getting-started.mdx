@@ -63,7 +63,7 @@ Workflows are triggered by events. In this example, we have defined a custom eve
 
 ```ts first-workflow.ts
 import { Trigger, customEvent } from "@trigger.dev/sdk";
-import { postMessage } from "@trigger.dev/slack";
+import * as slack from "@trigger.dev/slack";
 import { z } from "zod";
 
 new Trigger({
@@ -82,14 +82,12 @@ new Trigger({
     await ctx.logger.info("This log will appear on the Trigger.dev run page");
 
     //send a message to the #new-users Slack channel with user details
-    const response = await postMessage("send-to-slack", {
-      channel: "new-users",
+    await slack.postMessage("New User", {
+      channelName: "new-users",
       text: `New user: ${event.name} (${event.email}) signed up. ${
         event.paidPlan ? "They are paying" : "They are on the free plan"
       }.`,
     });
-
-    return response.message;
   },
 }).listen();
 ```
@@ -101,15 +99,15 @@ You'll notice that when we subscribe to the custom event we have to say the name
   workflow won't run.
 </Note>
 
-<Note>
+<Warning>
   Above we set the API key inside the Trigger object. We recommend instead that
   you add an environment variable called `TRIGGER_API_KEY`. That way you can use
   your development API key locally and the production one when you deploy.
-</Note>
+</Warning>
 
 ## 6. Run your web server
 
-Run your server how you normally would, e.g. `npm run dev`. This will connect your workflow to Trigger.dev, so we can start sending you events. You should see some log messages in your server console (tip: you can turn these off by removing the `logLevel: "info"` from the code above).
+Run your server how you normally would, e.g. `npm run dev`. This will connect your workflow to Trigger.dev, so we can start sending you events. You should see some log messages in your server console (tip: you can turn these off by adding `logLevel: "disabled"` in the code above).
 
 ## 5. Testing your workflow from the dashboard
 
