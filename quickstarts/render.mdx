@@ -1,0 +1,91 @@
+---
+title: "Deploy to Render.com Quickstart"
+sidebarTitle: "Deploy to Render.com"
+description: "Deploy your Trigger.dev functions to Render.com"
+---
+
+If you don't currently have a long-running Node.js process to host your Trigger.dev functions, you can easily deploy them to [Render.com](https://render.com/) using this guide.
+
+Render.com is a fully managed platform for hosting Node.js applications. It's easy to get started, and costs as little as $7/month for a Background Worker.
+
+For this quickstart we have developed an [Example Repo](https://github.com/triggerdotdev/render-deploy-example) that is setup and ready to deploy to Render.com. You can [fork this repo](https://github.com/triggerdotdev/render-deploy-example/fork) into your own GitHub organization or user account and follow along with this guide.
+
+### 1. Create a Render.com account
+
+If you don't already have a Render.com account, you can [sign up for a free account](https://dashboard.render.com/register) and get started.
+
+### 2. Create a new Background Worker service
+
+Because Trigger.dev functions are long-running Node.js processes, we'll use Render's Background Worker service to host them. On the "Create a new Background Worker" page, connect your GitHub account and give Render.com access to the repo forked above:
+
+![Create a new Background Worker service](/images/render/create-new-background-worker.png)
+
+Install the Render.com GitHub app on the repo you just forked (this is me installing the app on my fork of the example repo):
+
+![Install the Render.com GitHub app](/images/render/github-connect.png)
+
+You'll be redirected back to Render.com, where you should now see the repository you just forked and a "Connect" button. Click it.
+
+![Connect the repo](/images/render/github-connect-success.png)
+
+### 3. Configure the Background Worker
+
+Give your Background Worker service a name and then scroll down to the "Build Command" field. Enter the following command:
+
+![Connect the repo](/images/render/build-command.png)
+
+Select the **Starter** instance type, and then expand the **Advanced** section and add an environment key called `TRIGGER_API_KEY` with your Trigger.dev API key as the value.
+
+![Add the TRIGGER_API_KEY environment variable](/images/render/env-var.png)
+
+As a reminder, you can find your Trigger.dev API key in the [Trigger.dev dashboard](https://app.trigger.dev):
+
+![Get the live API key from the Trigger.dev dashboard](/images/render/live-key.png)
+
+### 4. Deploy and Test
+
+Click the "Create Background Worker" button to deploy your Trigger.dev functions to Render.com. Once the deployment is complete, you should see a log message showing that your Trigger.dev function is running and waiting for events:
+
+![Deploy and test](/images/render/deploy-logs.png)
+
+Head over to your Trigger.dev dashboard and you should see the Workflow you created:
+
+![New Workflow](/images/render/new-workflow.png)
+
+<Note>
+  Make sure you have selected the "Live" environment for this next part, as we
+  used your Live API key above in the tutorial
+</Note>
+
+Click the "Test" button to send a test event to your Trigger.dev function:
+
+![Test event](/images/render/test-event.png)
+
+Then head over to your Background Worker logs in Render.com and you should see a log message showing that the event was received:
+
+![Test event](/images/render/test-render-log.png)
+
+And finally you should see the run in your Trigger.dev dashboard:
+
+![Test event](/images/render/test-run-log.png)
+
+And that's it! You've successfully deployed your Trigger.dev functions to Render.com.
+
+If you have any problems or feedback, please email us at <a href="mailto:help@trigger.dev">help@trigger.dev</a> or choose one of the options below:
+
+<CardGroup>
+  <Card
+    title="Join the communty"
+    icon="discord"
+    href="https://discord.gg/nkqV9xBYWy"
+  >
+    The place to meet other users, the team and to get product updates.
+  </Card>
+  <Card
+    title="Schedule a call"
+    icon="video"
+    href="https://cal.com/team/triggerdotdev/support"
+  >
+    A call with someone from our support team. We are happy to help.
+  </Card>
+</CardGroup>
