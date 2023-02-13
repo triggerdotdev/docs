@@ -34,6 +34,22 @@ new Trigger({
 
 Notice the first parameter to `fetch` is a `key` that is used to identify this call to fetch to support resumability. Please see the [Resumability](/guides/resumability) guide for more information.
 
+The second parameter is the URL to fetch, and the third parameter is an optional options object that can be used to configure the request:
+
+```ts
+await ctx.fetch("Example Key", "http://httpbin.org/post", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: { hello: "world" },
+});
+```
+
+Notice how the `body` is an object, and will be automatically stringified as JSON. This is because the `fetch` function currently only supports JSON request and response bodies. See [Params](/#params) for more information.
+
+## Using outside of a Trigger.run function
+
 You can also import `fetch` and use it outside of a `Trigger.run` function:
 
 ```ts httpBin.ts
