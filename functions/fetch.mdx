@@ -9,7 +9,7 @@ description: "A generic fetch function that can be used to call any HTTP endpoin
 The `fetch` function provided by the trigger.dev SDK is a generic function that can be used to call any HTTP endpoint. It is designed to be used inside a `Trigger.run` function, and gives you the following benefits over using the standard [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) API:
 
 - We automatically retry with exponential back off (this can be configured with the options param)
-- The request and response are displayed in your Trigger.dev run dashbaord for easy debugging
+- The request and response are displayed in your Trigger.dev run dashboard for easy debugging
 - We automatically parse the response body as JSON and provide it as `body` on the response (and typed if you give provide a [responseSchema](/#response))
 - We will retry the request reliably, even if your workflow is stopped, e.g. you deploy in the middle of a run. See [Resumability](/guides/resumability) for more information.
 
