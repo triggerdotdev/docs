@@ -44,23 +44,21 @@
       "name": "GitHub",
       "icon": "github",
       "url": "https://github.com/triggerdotdev/trigger.dev"
+    },
+    {
+      "name": "Templates",
+      "icon": "sparkles",
+      "url": "https://app.trigger.dev/templates"
     }
   ],
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": [
-        "welcome",
-        "getting-started",
-        "get-help",
-        "viewing-runs"
-      ]
+      "pages": ["welcome", "getting-started", "get-help", "viewing-runs"]
     },
     {
       "group": "Quickstarts",
-      "pages": [
-        "quickstarts/render"
-      ]
+      "pages": ["quickstarts/render"]
     },
     {
       "group": "Example workflows",
@@ -115,9 +113,7 @@
             },
             {
               "group": "Resend.com",
-              "pages": [
-                "integrations/apis/resend/actions/send-email"
-              ]
+              "pages": ["integrations/apis/resend/actions/send-email"]
             },
             {
               "group": "WhatsApp",
@@ -125,9 +121,7 @@
                 "integrations/apis/whatsapp/main",
                 {
                   "group": "Events",
-                  "pages": [
-                    "integrations/apis/whatsapp/events/message"
-                  ]
+                  "pages": ["integrations/apis/whatsapp/events/message"]
                 },
                 {
                   "group": "Actions",
@@ -182,9 +176,7 @@
     },
     {
       "group": "API Reference",
-      "pages": [
-        "api-reference/events/sendEvent"
-      ]
+      "pages": ["api-reference/events/sendEvent"]
     },
     {
       "group": "Webhook Catalog",
@@ -212,10 +204,7 @@
     },
     {
       "group": "Updates",
-      "pages": [
-        "changelog",
-        "roadmap"
-      ]
+      "pages": ["changelog", "roadmap"]
     }
   ],
   "footerSocials": {
