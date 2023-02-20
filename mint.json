@@ -54,21 +54,11 @@
   "navigation": [
     {
       "group": "Getting Started",
-      "pages": ["welcome", "getting-started", "get-help", "viewing-runs"]
-    },
-    {
-      "group": "Quickstarts",
-      "pages": ["quickstarts/render"]
-    },
-    {
-      "group": "Example workflows",
       "pages": [
-        "examples/examples",
-        "examples/github",
-        "examples/resend",
-        "examples/shopify",
-        "examples/slack",
-        "examples/whatsapp"
+        "welcome",
+        "getting-started",
+        "viewing-runs",
+        "examples/examples"
       ]
     },
     {
@@ -113,7 +103,9 @@
             },
             {
               "group": "Resend.com",
-              "pages": ["integrations/apis/resend/actions/send-email"]
+              "pages": [
+                "integrations/apis/resend/actions/send-email"
+              ]
             },
             {
               "group": "WhatsApp",
@@ -121,7 +113,9 @@
                 "integrations/apis/whatsapp/main",
                 {
                   "group": "Events",
-                  "pages": ["integrations/apis/whatsapp/events/message"]
+                  "pages": [
+                    "integrations/apis/whatsapp/events/message"
+                  ]
                 },
                 {
                   "group": "Actions",
@@ -161,7 +155,8 @@
         "guides/resumability",
         "guides/event-filters",
         "guides/zod",
-        "guides/event-driven"
+        "guides/event-driven",
+        "guides/renderdotcom"
       ]
     },
     {
@@ -176,7 +171,9 @@
     },
     {
       "group": "API Reference",
-      "pages": ["api-reference/events/sendEvent"]
+      "pages": [
+        "api-reference/events/sendEvent"
+      ]
     },
     {
       "group": "Webhook Catalog",
@@ -203,8 +200,13 @@
       ]
     },
     {
-      "group": "Updates",
-      "pages": ["changelog", "roadmap"]
+      "group": "Community & Support",
+      "pages": [
+        "get-help",
+        "faq",
+        "changelog",
+        "roadmap"
+      ]
     }
   ],
   "footerSocials": {
