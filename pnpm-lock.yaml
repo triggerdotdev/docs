@@ -1,10 +1,10 @@
 lockfileVersion: 5.4
 
 specifiers:
-  mintlify: 2.0.16
+  mintlify: 3.0.7
 
 devDependencies:
-  mintlify: 2.0.16
+  mintlify: 3.0.7
 
 packages:
 
@@ -65,11 +65,89 @@ packages:
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
     dev: true
 
-  /@mintlify/validation/0.1.7:
-    resolution: {integrity: sha512-qHd/Nos8X+hLYsxrVwSNtTkLVivN15lZswryAi//rvbpkYwhdK9owVkSsiCCrq4EEiY+B7BFHzvXTGws6z/abw==}
+  /@mintlify/cli/3.0.7:
+    resolution: {integrity: sha512-UrcWKok6VV9xMRvFCN79pdiUvJXJxFrTagBaui1OW9T9NnG9LXmtADCcujT8WX30JkR3NhO4Pl1idK6aY/HftQ==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
     dependencies:
-      zod: 3.20.2
-      zod-to-json-schema: 3.20.2_zod@3.20.2
+      '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
+      '@mintlify/previewing': 3.1.1
+      '@mintlify/validation': 0.1.9
+      '@octokit/rest': 19.0.7
+      axios: 1.3.2
+      chalk: 5.2.0
+      cheerio: 0.22.0
+      chokidar: 3.5.3
+      favicons: 7.0.2
+      fs-extra: 11.1.0
+      gray-matter: 4.0.3
+      inquirer: 9.1.4
+      is-absolute-url: 4.0.1
+      is-internet-available: 3.1.0
+      minimist-lite: 2.2.1
+      node-html-markdown: 1.3.0
+      open: 8.4.0
+      openapi-types: 12.1.0
+      ora: 6.1.2
+      puppeteer: 19.6.3
+      remark: 14.0.2
+      remark-frontmatter: 4.0.1
+      remark-gfm: 3.0.1
+      remark-mdx: 2.2.1
+      shelljs: 0.8.5
+      unist-util-visit: 4.1.2
+      yargs: 17.6.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: true
+
+  /@mintlify/prebuild/1.0.0:
+    resolution: {integrity: sha512-L+2WgrJ0Le1tOYFPib0CuVAirSysm4sFhNiO9r5dSK5X+aERiPu28+0jeg00/VH8PZqILK54Ef874u+2f98G5Q==}
+    dependencies:
+      fs-extra: 11.1.0
+    dev: true
+
+  /@mintlify/previewing/3.1.1:
+    resolution: {integrity: sha512-rH0Cf3QgicXcJYORebBj8NROqrLI0JbzTzD+F75keJoyLJBuXa3dnVIRhu6eYjuQ+mpyy1VEFkYAcsfKiVGxSg==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
+      '@mintlify/prebuild': 1.0.0
+      '@mintlify/validation': 0.1.9
+      '@octokit/rest': 19.0.7
+      axios: 1.3.2
+      chalk: 5.2.0
+      chokidar: 3.5.3
+      fs-extra: 11.1.0
+      gray-matter: 4.0.3
+      inquirer: 9.1.4
+      is-absolute-url: 4.0.1
+      is-internet-available: 3.1.0
+      open: 8.4.0
+      openapi-types: 12.1.0
+      ora: 6.1.2
+      remark: 14.0.2
+      remark-frontmatter: 4.0.1
+      remark-gfm: 3.0.1
+      remark-mdx: 2.2.1
+      shelljs: 0.8.5
+      unist-util-visit: 4.1.2
+      yargs: 17.6.2
+    transitivePeerDependencies:
+      - debug
+      - encoding
+      - supports-color
+    dev: true
+
+  /@mintlify/validation/0.1.9:
+    resolution: {integrity: sha512-ACRxy+BM0Y6KUZaJ8GfPbkD/JFjX256f6k0abUfWdk7Vv90OOq2MEhHNDOXD8HImojEgw5I+GSvSS19XQd0kQA==}
+    dependencies:
+      zod: 3.20.6
+      zod-to-json-schema: 3.20.4_zod@3.20.6
     dev: true
 
   /@octokit/auth-token/3.0.3:
@@ -1901,37 +1979,12 @@ packages:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
     dev: true
 
-  /mintlify/2.0.16:
-    resolution: {integrity: sha512-8SppN2c2F6rt2QlYkDIqZZV9S2jXuUUbWo75eDGURMRfWxpFKGCRxsueY0Oerq/yO/Mlzg5ZNHutJHRipCgLcg==}
+  /mintlify/3.0.7:
+    resolution: {integrity: sha512-QFbl0iFoiDbHh0pz48XcjaD5mbdChPKs8OuhVlC/emIKC8JmyBpzvW1YlZlWTTkrsubkX+N0qeDUR68qwcrkPw==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
-      '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
-      '@mintlify/validation': 0.1.7
-      '@octokit/rest': 19.0.7
-      axios: 1.3.2
-      chalk: 5.2.0
-      cheerio: 0.22.0
-      chokidar: 3.5.3
-      favicons: 7.0.2
-      fs-extra: 11.1.0
-      gray-matter: 4.0.3
-      inquirer: 9.1.4
-      is-absolute-url: 4.0.1
-      is-internet-available: 3.1.0
-      minimist-lite: 2.2.1
-      node-html-markdown: 1.3.0
-      open: 8.4.0
-      openapi-types: 12.1.0
-      ora: 6.1.2
-      puppeteer: 19.6.3
-      remark: 14.0.2
-      remark-frontmatter: 4.0.1
-      remark-gfm: 3.0.1
-      remark-mdx: 2.2.1
-      shelljs: 0.8.5
-      unist-util-visit: 4.1.2
-      yargs: 17.6.2
+      '@mintlify/cli': 3.0.7
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -2768,16 +2821,16 @@ packages:
       fd-slicer: 1.1.0
     dev: true
 
-  /zod-to-json-schema/3.20.2_zod@3.20.2:
-    resolution: {integrity: sha512-qka3UAXmVXD8z5SHkRU89UyHp8JHJW7zc8RQCpt7QloJOn6uijwkjUm8o+M/cF1IysmKc5gxac/QeDikaQMdzQ==}
+  /zod-to-json-schema/3.20.4_zod@3.20.6:
+    resolution: {integrity: sha512-Un9+kInJ2Zt63n6Z7mLqBifzzPcOyX+b+Exuzf7L1+xqck9Q2EPByyTRduV3kmSPaXaRer1JCsucubpgL1fipg==}
     peerDependencies:
       zod: ^3.20.0
     dependencies:
-      zod: 3.20.2
+      zod: 3.20.6
     dev: true
 
-  /zod/3.20.2:
-    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
     dev: true
 
   /zwitch/2.0.4:

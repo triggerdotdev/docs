@@ -101,9 +101,11 @@ There is a [full guide on sending events](/functions/send-event) but here is a q
 
 ```ts
 import { sendEvent } from "@trigger.dev/sdk";
+import { randomUUID } from "node:crypto";
 
-//send an event with the name "user.created"
-await sendEvent("fire-user-created-event", {
+// send an event with the name "user.created"
+// The first param should be a unique ID for this event
+await sendEvent(randomUUID(), {
   name: "user.created",
   payload: { name: "John Doe", email: "john@doe.com", paidPlan: true },
 });
@@ -112,6 +114,7 @@ await sendEvent("fire-user-created-event", {
 If you are calling this from inside a workflow, ensure that the first parameter is unique inside your workflow.
 
 <Note>
-  The same event can trigger many different workflows, just subscribe to the
-  same event name to achieve this.
+  You can subscribe to the same event from multiple different workflows. This is
+  useful if you want to send an event to multiple different services or if you
+  want to keep each workflow small and simple.
 </Note>

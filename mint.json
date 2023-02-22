@@ -36,14 +36,14 @@
   },
   "anchors": [
     {
+      "name": "Integrations",
+      "icon": "grid-2",
+      "url": "integrations"
+    },
+    {
       "name": "Community",
       "icon": "discord",
       "url": "https://discord.gg/nkqV9xBYWy"
-    },
-    {
-      "name": "GitHub",
-      "icon": "github",
-      "url": "https://github.com/triggerdotdev/trigger.dev"
     },
     {
       "name": "Templates",
@@ -56,8 +56,8 @@
       "group": "Getting Started",
       "pages": [
         "welcome",
+        "what-is-triggerdotdev",
         "getting-started",
-        "viewing-runs",
         "examples/examples"
       ]
     },
@@ -67,75 +67,6 @@
         "triggers/webhooks",
         "triggers/custom-events",
         "triggers/scheduled"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        {
-          "group": "APIs",
-          "pages": [
-            {
-              "group": "GitHub",
-              "pages": [
-                {
-                  "group": "Events",
-                  "pages": [
-                    "integrations/apis/github/events/issue-comments",
-                    "integrations/apis/github/events/issues",
-                    "integrations/apis/github/events/new-star",
-                    "integrations/apis/github/events/pull-request-comments",
-                    "integrations/apis/github/events/pull-request-reviews",
-                    "integrations/apis/github/events/pull-requests",
-                    "integrations/apis/github/events/push"
-                  ]
-                }
-              ]
-            },
-            {
-              "group": "Slack",
-              "pages": [
-                "integrations/apis/slack/actions/post-message",
-                "integrations/apis/slack/actions/post-message-response",
-                "integrations/apis/slack/actions/add-reaction",
-                "integrations/apis/slack/actions/open-view"
-              ]
-            },
-            {
-              "group": "Resend.com",
-              "pages": [
-                "integrations/apis/resend/actions/send-email"
-              ]
-            },
-            {
-              "group": "WhatsApp",
-              "pages": [
-                "integrations/apis/whatsapp/main",
-                {
-                  "group": "Events",
-                  "pages": [
-                    "integrations/apis/whatsapp/events/message"
-                  ]
-                },
-                {
-                  "group": "Actions",
-                  "pages": [
-                    "integrations/apis/whatsapp/actions/text-message",
-                    "integrations/apis/whatsapp/actions/reaction-message",
-                    "integrations/apis/whatsapp/actions/audio-message",
-                    "integrations/apis/whatsapp/actions/video-message",
-                    "integrations/apis/whatsapp/actions/document-message",
-                    "integrations/apis/whatsapp/actions/sticker-message",
-                    "integrations/apis/whatsapp/actions/template-message",
-                    "integrations/apis/whatsapp/actions/location-message",
-                    "integrations/apis/whatsapp/actions/contacts-message"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "integrations/authentication"
       ]
     },
     {
@@ -152,11 +83,13 @@
     {
       "group": "Guides",
       "pages": [
+        "guides/using-integrations",
+        "guides/environments",
+        "guides/running-tests",
+        "guides/deployment",
         "guides/resumability",
         "guides/event-filters",
-        "guides/zod",
-        "guides/event-driven",
-        "guides/renderdotcom"
+        "guides/zod"
       ]
     },
     {
@@ -176,36 +109,115 @@
       ]
     },
     {
-      "group": "Webhook Catalog",
-      "pages": [
-        {
-          "group": "Slack",
-          "pages": [
-            "integrations/apis/slack/events/block-action-interaction",
-            "integrations/apis/slack/events/view-submission-interaction"
-          ]
-        },
-        {
-          "group": "GitHub",
-          "pages": [
-            "integrations/apis/github/events/push",
-            "integrations/apis/github/events/issues",
-            "integrations/apis/github/events/issue-comments",
-            "integrations/apis/github/events/pull-requests",
-            "integrations/apis/github/events/pull-request-reviews",
-            "integrations/apis/github/events/pull-request-comments",
-            "integrations/apis/github/events/new-star"
-          ]
-        }
-      ]
-    },
-    {
       "group": "Community & Support",
       "pages": [
         "get-help",
         "faq",
         "changelog",
         "roadmap"
+      ]
+    },
+    {
+      "group": "Slack",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/slack/actions/post-message",
+            "integrations/apis/slack/actions/post-message-response",
+            "integrations/apis/slack/actions/add-reaction",
+            "integrations/apis/slack/actions/open-view"
+          ]
+        },
+        {
+          "group": "Webhooks",
+          "pages": [
+            "integrations/apis/slack/events/block-action-interaction",
+            "integrations/apis/slack/events/view-submission-interaction"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "GitHub",
+      "pages": [
+        {
+          "group": "Webhooks",
+          "pages": [
+            "integrations/apis/github/events/issue-comments",
+            "integrations/apis/github/events/issues",
+            "integrations/apis/github/events/new-star",
+            "integrations/apis/github/events/pull-request-comments",
+            "integrations/apis/github/events/pull-request-reviews",
+            "integrations/apis/github/events/pull-requests",
+            "integrations/apis/github/events/push"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "WhatsApp",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/whatsapp/actions/text-message",
+            "integrations/apis/whatsapp/actions/reaction-message",
+            "integrations/apis/whatsapp/actions/audio-message",
+            "integrations/apis/whatsapp/actions/video-message",
+            "integrations/apis/whatsapp/actions/document-message",
+            "integrations/apis/whatsapp/actions/sticker-message",
+            "integrations/apis/whatsapp/actions/template-message",
+            "integrations/apis/whatsapp/actions/location-message",
+            "integrations/apis/whatsapp/actions/contacts-message"
+          ]
+        },
+        {
+          "group": "Webhooks",
+          "pages": [
+            "integrations/apis/whatsapp/events/message"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Resend.com",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/resend/actions/send-email"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Airtable",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/airtable/actions/list-records",
+            "integrations/apis/airtable/actions/get-record",
+            "integrations/apis/airtable/actions/create-records",
+            "integrations/apis/airtable/actions/update-record",
+            "integrations/apis/airtable/actions/update-records",
+            "integrations/apis/airtable/actions/delete-record",
+            "integrations/apis/airtable/actions/delete-records"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Sendgrid",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/sendgrid/actions/mail-send",
+            "integrations/apis/sendgrid/actions/marketing-contacts"
+          ]
+        }
       ]
     }
   ],

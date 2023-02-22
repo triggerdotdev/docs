@@ -1,0 +1,133 @@
+---
+title: "Environments and API Keys"
+sidebarTitle: "Environments & API Keys"
+description: "Learn how to use environments and API keys"
+---
+
+When you create an Organization in Trigger.dev, we will automatically create two default environments for you: `live` and `development`, each with their own API key, which you can find in the Organization sidebar:
+
+![org sidebar](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/4b559572-1e9a-4eb1-7296-1520f4ae8300/public)
+
+You should use the `live` environment when running your workflows in production, and the `development` environment when running your workflows on your local machine. Each workflow "run" is associated with a specific environment, so a run in the `live` environment will not be visible in the `development` environment.
+
+## Using API Keys
+
+When you define your Trigger.dev workflows in code, you can pass in the relevant API Key to the constructor:
+
+```ts
+import { Trigger, customEvent } from "@trigger.dev/sdk";
+import { z } from "zod";
+
+new Trigger({
+  id: "basic-starter",
+  name: "Basic Starter",
+  apiKey: "trigger_development_qvq1uKLrWT7o",
+  on: customEvent({
+    name: "basic.starter",
+    schema: z.object({ id: z.string() }),
+  }),
+  run: async (event, ctx) => {
+    // Do something with the event here
+  },
+}).listen();
+```
+
+If you were to run the code above, the workflow would be registerd in your organization and ready to use in the `development` environment.
+
+<Warning>
+  Please do not hardcode your API keys in your code, instead use an environment
+  variable.
+</Warning>
+
+We will automatically use the `TRIGGER_API_KEY` environment variable to set the API key for your workflow, if it is present. For a good guide on defining and using environment variables in Node.js, please see [this article published by the Twilio team](https://www.twilio.com/blog/working-with-environment-variables-in-node-js-html)
+
+## Environments and Triggers
+
+Different triggers behave differently when it comes to environments and API keys:
+
+### Webhooks
+
+When an event comes from a webhook, both the `live` and `development` environments will trigger workflow runs. This is because the webhook is not associated with a specific environment, and we don't have to register two different webhooks for each webhook triggered workflow.
+
+### Custom events
+
+When you have a workflow that is triggered via a custom event, then only the environment associated with that event will be run. For example, if you have a workflow that is triggered by a custom event called `basic.starter`:
+
+```ts
+import { Trigger, customEvent } from "@trigger.dev/sdk";
+import { z } from "zod";
+
+new Trigger({
+  id: "basic-starter",
+  name: "Basic Starter",
+  on: customEvent({
+    name: "basic.starter",
+    schema: z.object({ id: z.string() }),
+  }),
+  async run(event, ctx) {
+    await ctx.logger.info("Hello world from inside trigger.dev");
+  },
+}).listen();
+```
+
+And you send this custom event using the `@trigger.dev/sdk` in some other place in your code:
+
+```ts
+import { sendEvent } from "@trigger.dev/sdk";
+import { randomUUID } from "node:crypto";
+
+// Send a custom event to the "basic.starter" workflow
+// This will only trigger the workflow corresponding to the TRIGGER_API_KEY environment variable
+await sendEvent(randomUUID(), {
+  name: "basic.starter",
+  payload: { id: "user_1234" },
+});
+```
+
+`sendEvent` automatically uses the `TRIGGER_API_KEY` environment variable to determine which environment to send the event to. So if the `trigger_development_*` API Key is used, then the event will be sent to the `development` environment, and if the `trigger_live_*` API Key is used, then the event will be sent to the `live` environment.
+
+You can see this in action here in [Insomnia](https://insomnia.rest/), using our [sendEvent](/api-reference/events/sendEvent) API endpoint, where we include the API Key as the bearer token:
+
+![insomnia](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/e6f3e2c3-fe00-4d79-1922-19ae33cc5500/public)
+
+### Scheduled
+
+At the moment, scheduled events trigger exactly the same in both the `live` and `development` environments, creating a run in each environment for every scheduled event.
+
+<Info>
+  We're going to be releasing an update soon that changes this behaviour, where
+  only the `live` environment will be triggered on a schedule, and test runs
+  will be required to trigger `development` runs.
+</Info>
+
+## Changing Environments
+
+In the Trigger.dev dashboard, you can switch between environments using the dropdown in the top bar:
+
+![changing envs](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/fbd062c7-3dfe-427f-e69f-204c84828500/public)
+
+## Detecting the environment of a run
+
+You can detect which environment a run is associated with by using the `context.environment` property in your workflow code:
+
+```ts
+import { Trigger, customEvent } from "@trigger.dev/sdk";
+import { z } from "zod";
+
+new Trigger({
+  id: "basic-starter",
+  name: "Basic Starter",
+  apiKey: "trigger_development_qvq1uKLrWT7o",
+  on: customEvent({
+    name: "basic.starter",
+    schema: z.object({ id: z.string() }),
+  }),
+  run: async (event, ctx) => {
+    if (ctx.environment === "live") {
+      await ctx.logger.info("This is the live environment");
+    } else {
+      await ctx.logger.info("This is the development environment");
+    }
+  },
+}).listen();
+```

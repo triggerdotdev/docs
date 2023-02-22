@@ -1,0 +1,264 @@
+---
+title: "Using integrations"
+sidebarTitle: "Using integrations"
+description: "Learn how to use our integrations to easily work with 3rd party APIs."
+---
+
+We provide a number of integrations to make it easy to work with 3rd party APIs, both for triggering your workflows through [webhooks](/triggers/webhooks) and for making API calls from your workflows.
+
+## Webhooks
+
+Webhooks allow you to trigger your workflows when an event happens in a 3rd party service. For example, you can trigger a workflow when a new GitHub issue is created, or when a user in your slack interacts with a message. Using our integrations for webhooks gives you the following advantages over using raw webhooks:
+
+- When working locally, you don't need to expose your local server to the internet over a tunnel like ngrok.
+- We will automatically register the webhook with GitHub for you, and verify the payload signature.
+- We provide a nicely typed `event` payload to your `run` function, so you don't have to setup webhook payload types.
+- If your server isn't running, we will wait until it's back online before attempting to run the workflow.
+- It is very easy to test your workflow locally using our [Test Run](/guides/running-tests) feature.
+
+### Using webhooks in your workflow
+
+To use an integration webhook to trigger a workflow, you first need to install the corresponding integration package. For example, if we wanted to use the [github.newStarEvent](/integrations/apis/github/events/new-star) webhook, we would install the `@trigger.dev/github` package:
+
+<Tabs>
+  <Tab title="npm">
+
+```bash
+npm install @trigger.dev/github
+```
+
+  </Tab>
+  <Tab title="pnpm">
+
+```bash
+pnpm add @trigger.dev/github
+```
+
+  </Tab>
+  <Tab title="yarn">
+
+```bash
+yarn add @trigger.dev/github
+```
+
+  </Tab>
+</Tabs>
+
+We'd then import it and pass it to the `on` option of the `Trigger` constructor:
+
+```ts
+import { Trigger } from "@trigger.dev/sdk";
+import * as github from "@trigger.dev/github";
+
+new Trigger({
+  id: "new-github-star",
+  name: "New GitHub Star",
+  on: github.events.newStarEvent({
+    repo: "triggerdotdev/trigger.dev",
+  }),
+  run: async (event, ctx) => {
+    // Do something with the event here
+  },
+}).listen();
+```
+
+Different webhooks have different parameters, so make sure and check out the documentation for the specific webhook you are using. For example, the [github.newStarEvent](/integrations/apis/github/events/new-star) webhook has a `repo` parameter, which is the name of the GitHub repo that you want to listen for stars on.
+
+### Authenticating webhooks
+
+When you create a workflow with a webhook trigger (like the GitHub example above), we will automatically register the webhook for you, but you first need to authenticate with the 3rd party service (in this case, GitHub). Using the example above, after running the workflow for the first time, you will see a message like this in your app.trigger.dev dashboard:
+
+![webhook needs auth](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/64329d7d-207f-42fc-93db-27213911b100/public)
+
+Clicking through to the Workflow overview page, you will be prompted to authenticate to GitHub so we can register the webhook on your behalf:
+
+![webhook auth prompt](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/e0777a3a-5947-4d31-c8c1-7848c57f0d00/public)
+
+After authenticating, you will be redirected back to the Workflow overview page, and your workflow will be ready to go:
+
+![webhook ready](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/e092b470-9c28-4905-5d0d-fe9b13c45f00/public)
+
+<Note>
+  When visiting the Workflow Overview page, make sure you've selected the
+  corresponding environment that you used when first registering your workflow.
+  For more about this please see our [Environments & API Keys
+  guide](/guides/environments)
+</Note>
+
+### Testing webhooks
+
+When you are developing a workflow with a webhook trigger, you can test it locally using our [Test Run](/guides/running-tests) feature. This will allow you to trigger your workflow without having to set up a webhook on the 3rd party service (in this case, GitHub). Using the example above, you can test your workflow by clicking the "Test workflow" button in the Workflow Overview page, which will bring you to a test page with some mock data for the event:
+
+![webhook test page](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/0f7749e5-a585-43cc-b321-09ccbf0b5600/public)
+
+Clicking on "Run test" will trigger your workflow and bring you to the Workflow Run page, where you can see the results of your workflow:
+
+![webhook test run](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/9b1de6e7-7e19-4dec-af96-0efdde847200/public)
+
+### Triggering webhooks
+
+Another way to test your workflow is to trigger it using a real webhook payload. This is useful if you want to test your workflow with real data from the 3rd party service (in this case, GitHub). The easiest way to do that is to actually perform the action that will trigger the webhook (in this case, starring the specified GitHub repo):
+
+![github star](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/a86dd9b1-cba9-4b3a-2d73-4bb637525900/public)
+
+<Note>
+  A single webhook payload will trigger your workflow in both your `live` and
+  `development` environments. For more about this please see our [Environments &
+  API Keys guide](/guides/environments)
+</Note>
+
+## API calls (a.k.a. "actions")
+
+Actions allow you to make API calls from your workflows. For example, you can post a message to Slack, or create a new GitHub issue. Using our integrations for actions gives you the following advantages over using raw API calls:
+
+- We automatically handle the OAuth flow for you, so you don't have to worry about setting up a Slack app and dealing with credentials in your code (see [Authentication](#authenticating-actions) for more details).
+- We will automatically retry the request if the API returns an error or you are rate limited.
+- We provide a nicely typed `response` object, so you don't have to setup API response types.
+
+Each action doesn't necessarily map to 1 API call as well. For example, our [slack.postMessage](/integrations/apis/slack/actions/post-message) action does the following things:
+
+- We let you pass the `channelName` parameter to the `postMessage` function, and we will automatically resolve it to the channel ID for you (which is required by the Slack API).
+- We will automatically invite the bot to the channel if it isn't already a member.
+
+### Using actions in your workflow
+
+To use an action in your workflow, you first need to install the corresponding integration package. For example, if we wanted to use the [slack.postMessage](/integrations/apis/slack/actions/post-message) action, we would install the `@trigger.dev/slack` package:
+
+<Tabs>
+  <Tab title="npm">
+
+```bash
+npm install @trigger.dev/slack
+```
+
+  </Tab>
+  <Tab title="pnpm">
+
+```bash
+pnpm add @trigger.dev/slack
+```
+
+  </Tab>
+  <Tab title="yarn">
+
+```bash
+yarn add @trigger.dev/slack
+```
+
+  </Tab>
+</Tabs>
+
+Now you can import the integration and use the action inside the `run` function of your workflow:
+
+```ts
+import { Trigger } from "@trigger.dev/sdk";
+import * as github from "@trigger.dev/github";
+import * as slack from "@trigger.dev/slack";
+
+new Trigger({
+  id: "new-github-star",
+  name: "New GitHub Star",
+  on: github.events.newStarEvent({
+    repo: "triggerdotdev/trigger.dev",
+  }),
+  run: async (event, ctx) => {
+    await slack.postMessage("new-github-star", {
+      channelName: "github-stars",
+      text: `New star on ${event.repo}!`,
+    });
+  },
+}).listen();
+```
+
+<Note>
+  The first parameter passed to all actions is known as the `key`, and must be
+  unique per workflow run. Please see our detailed [Keys and Resumability
+  guide](/guides/resumability) for more information on why this is needed to
+  ensure your workflow is resumable.
+</Note>
+
+You can also use actions outside of the `Trigger.run` function, allowing you to wrap them in helper functions:
+
+```ts
+import { Trigger } from "@trigger.dev/sdk";
+import * as github from "@trigger.dev/github";
+import * as slack from "@trigger.dev/slack";
+
+new Trigger({
+  id: "new-github-star",
+  name: "New GitHub Star",
+  on: github.events.newStarEvent({
+    repo: "triggerdotdev/trigger.dev",
+  }),
+  run: async (event, ctx) => {
+    await postMessageToSlack("new-github-star", `New star on ${event.repo}!`);
+  },
+}).listen();
+
+async function postMessageToSlack(key: string, text: string) {
+  return slack.postMessage(key, {
+    channelName: "github-stars",
+    text,
+  });
+}
+```
+
+### Action outputs
+
+Some actions will return an output value. For example, the [slack.postMessage](/integrations/apis/slack/actions/post-message) action will return the `ts` value of the message that was posted:
+
+```ts
+const output = await slack.postMessage("new-github-star", {
+  channelName: "github-stars",
+  text: `New star on ${event.repo}!`,
+});
+
+console.log(`The message ts is ${output.ts}`);
+```
+
+You can consult the documentation for each action to see what outputs it returns.
+
+### Action errors & retries
+
+We will retry actions up to 10 times if we receive certain error codes from an API. For example, if the Slack API returns a `429` error code (indicating that we are being rate limited), we will automatically retry the request after a short delay. Here is the retry schedule we use (using the following formula: `delay = 1.8 ^ (retry - 1) * 1000`
+
+| Retry # | Delay |
+| ------- | ----- |
+| 1       | 1s    |
+| 2       | 1.8s  |
+| 3       | 3.2s  |
+| 4       | 5.8s  |
+| 5       | 10.5s |
+| 6       | 19s   |
+| 7       | 34s   |
+| 8       | ~1m   |
+| 9       | ~2m   |
+| 10      | ~4m   |
+
+If the API returns a non-retryable status code, such as most client errors (4xx), we will not retry the request and instead the action will fail and the workflow run will halt and be marked as errored:
+
+![action error](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/3f7e3f60-1194-4fff-0602-e8cc7b628d00/public)
+
+### Authenticating actions
+
+To be able to perform the actions in our integration packages, you will need to provide authentication information for the corresponding integration, which we will use to make the API calls. Integrations usually require either an API Key (such as Resend.com) or an OAuth token (such as Slack).
+
+For OAuth integrations, we will automatically handle the OAuth flow for you, so you don't have to worry about setting up a Slack app and dealing with credentials in your code. We will prompt you to authenticate the integration when you first use it in your workflow, and we will store the credentials securely in our database.
+
+For example, when using the `slack.postMessage` action, if you haven't already added a Slack integration, we will pause the action and ask you to authenticate:
+
+![slack needs auth](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/b278bbd1-699c-4106-231a-8a5e9a890100/public)
+
+Clicking on "Connect to Slack" will open a modal where you can authenticate the integration:
+
+![slack auth modal](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/14ccbd44-7b4f-4cb7-10d3-fb5438267600/public)
+
+<Info>
+  We currently request the OAuth permissions (scopes) needed to perform all the
+  actions included in our integrations, but we're planning on adding more
+  fine-grained permissions in a coming update.
+</Info>
+
+Once authenticated, the action will resume and the message will be posted to Slack:
+
+![slack run complete](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/b4bc3397-d0f1-42e0-8abe-8725fc0bf600/public)

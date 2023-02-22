@@ -13,10 +13,11 @@ You can easily send an event from anywhere, including from inside another workfl
 
 ```ts
 import { sendEvent } from "@trigger.dev/sdk";
+import { randomUUID } from "node:crypto";
 
 //send an event with the name "user.created"
 //and the payload
-await sendEvent("start-fire-2", {
+await sendEvent(randomUUID(), {
   name: "user.created",
   payload: { userId: "123456" },
 });
@@ -28,14 +29,14 @@ await sendEvent("start-fire-2", {
 ```bash
 curl --request POST \
   --url https://app.trigger.dev/api/v1/events \
-  --header 'Authorization: Bearer <insert_api_key_here>' \
+  --header 'Authorization: Bearer <your api key here>' \
   --header 'Content-Type: application/json' \
   --data '{
-            "id": "<optional unique event id>",
+            "id": "<unique event id>",
             "event": {
               "name": "user.created",
               "payload": {
-                      "userId": "123456"
+                "userId": "123456"
               }
             }
           }'
@@ -44,11 +45,9 @@ curl --request POST \
   </Tab>
 </Tabs>
 
-If you are calling this from inside a workflow, ensure that the first parameter is unique inside your workflow.
-
 ## Sending events from other workflows
 
-It is useful to send events from workflows because you can split your logic into smaller chunks and reuse them. The below example shows how a scheduled workflow delegates the work via sending a custom event:
+It is useful to send events from workflows because you can split your logic into smaller chunks and reuse them. The below example shows how a scheduled workflow delegates work via sending a custom event:
 
 <CodeGroup>
 
@@ -119,6 +118,13 @@ export const healthCheck = new Trigger({
 
 </CodeGroup>
 
+<Divider />
+
+Notice that when calling `sendEvent` using the `context` parameter, the first
+parameter is no longer a unique ID for the event, but instead a key string
+that is unique across all actions in the workflow run. See our [Keys and
+Resumability Guide](/guides/resumability) for more info.
+
 ## Delaying event delivery
 
 Through both our Node.js SDK and our HTTP API, you can delay the delivery of an event. This is useful if you want to send an event to trigger a workflow, but you want to wait for a certain amount of time before the event is delivered.
@@ -175,11 +181,11 @@ curl --request POST \
   --header 'Authorization: Bearer <insert_api_key_here>' \
   --header 'Content-Type: application/json' \
   --data '{
-            "id": "<optional unique event id>",
+            "id": "<unique event id>",
             "event": {
               "name": "user.created",
               "payload": {
-                      "userId": "123456"
+                "userId": "123456"
               },
               "delay": {
                 "seconds": 30
