@@ -92,7 +92,7 @@ This is useful if you want to wrap `fetch` to provide an SDK like experience ins
   error and will instead return a response with `ok` set to `false`.
 </Tip>
 
-The return value of `fetch` is a similar to a normal fetch response, but we will automatically parse the response body as JSON and provide it as `body`, like so:
+The return value of `fetch` is similar to a normal fetch response, but we will automatically parse the response body as JSON and provide it as `body`, like so:
 
 ```ts
 const response = await ctx.fetch("Example Key", "http://httpbin.org/get");
