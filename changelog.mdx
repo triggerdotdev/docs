@@ -3,6 +3,33 @@ title: "Changelog"
 description: "We release features and fixes weekly! See some of the changes we have made."
 ---
 
+## Feb 27 2023 Release
+
+#### app.trigger.dev
+
+We've retooled our [Templates](https://app.trigger.dev/templates) system to make it easier to get started with the new [create-trigger](https://www.npmjs.com/package/create-trigger) CLI:
+
+![create-trigger demo](/images/create-trigger-demo.gif)
+
+We've also added a few more templates:
+
+- [GitHub Issues to Slack](https://app.trigger.dev/templates/github-issues-to-slack) - Get notified anytime your repo gets a issue
+- [Scheduled Healthcheck](https://app.trigger.dev/templates/scheduled-healthcheck) - Run a scheduled healthcheck on your website every 5 minutes
+- And more coming soon!
+
+#### @trigger.dev/sdk - v0.2.18
+
+- Make the schema an optional param for customEvent and webhookEvent
+- Give a better error message when the API key is invalid
+- Added a more helpful error message when missing an API key
+- Added handly links to the dashboard in log feedback
+- Log out when a run first starts as well
+- Fixed an issue where using `sendEvent` outside of a run wouldn't use the first param as the event `id`
+
+#### create-trigger - v0.2.0
+
+Initial release of the [create-trigger](https://www.npmjs.com/package/create-trigger) CLI. This makes it easy to get started with Trigger.dev workflows using our templates.
+
 ## Feb 21 2023 Release
 
 #### integrations.trigger.dev
