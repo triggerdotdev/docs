@@ -1,0 +1,24 @@
+<Tab title="ruby">
+    
+```ruby
+require 'httparty'
+
+HTTParty.post('https://app.trigger.dev/api/v1/events',
+  headers: {
+    'Authorization' => 'Bearer <your api key here>',
+    'Content-Type' => 'application/json'
+  },
+  body: {
+    id: '<unique event id>',
+    event: {
+      name: 'user.created',
+      payload: {
+        userId: '123456'
+      }
+    }
+  }.to_json
+)
+
+```
+
+</Tab>

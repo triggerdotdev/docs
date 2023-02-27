@@ -1,0 +1,23 @@
+<Tab title="python">
+
+```python
+import http.client
+
+conn = http.client.HTTPSConnection('app.trigger.dev')
+
+payload = '{"id": "261c4c27-17c4-486a-ab2b-431dfbe0de31","event": {"name": "basic.starter","payload": {"id": "user_1234"}}}'
+
+headers = {
+    'Content-Type': "application/json",
+    'Authorization': "Bearer <YOUR_API_KEY>"
+    }
+
+conn.request("POST", "/api/v1/events", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+```
+
+</Tab>

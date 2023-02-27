@@ -4,47 +4,7 @@ sidebarTitle: "sendEvent"
 description: "Send a custom event to Trigger, from inside or outside of a workflow."
 ---
 
-## Usage
-
-```ts
-import { Trigger, customEvent } from "@trigger.dev/sdk";
-
-new Trigger({
-  id: "usage",
-  name: "usage",
-  on: customEvent({
-    name: "user.created",
-    schema: z.any(),
-  }),
-  run: async (event, ctx) => {
-    await ctx.sendEvent("Sending context user.created event", {
-      name: "user.created",
-      payload: {
-        id: "1234_abc",
-      },
-    });
-  },
-}).listen();
-```
-
-You can also use `sendEvent` by importing it from `@trigger.dev/sdk`:
-
-```ts
-import { sendEvent } from "@trigger.dev/sdk";
-
-await sendEvent("Sending context user.created event", {
-  name: "user.created",
-  payload: {
-    id: "1234_abc",
-  },
-});
-```
-
-<Note>
-  If calling `sendEvent` from outside of a workflow run, it will make an HTTP
-  API request to app.trigger.dev to send the event. Make sure you set the
-  `TRIGGER_API_KEY` environment variable if you will be using it this way.
-</Note>
+See our [sendEvent guide](/functions/send-event) for more info.
 
 ## Parameters
 

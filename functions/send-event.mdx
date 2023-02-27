@@ -4,12 +4,11 @@ sidebarTitle: "Send event"
 description: "Send events to trigger your custom events workflows."
 ---
 
-## Send an event
+To trigger your custom event workflows, you'll need to send an event to our API. You can do this via our `@trigger.dev/sdk` package or via our HTTP API.
 
-You can easily send an event from anywhere, including from inside another workflow. Events don't have to come from the same server as your workflow and can be sent as HTTP requests from any language (see our cURL example below for the format).
+## Sending events via `@trigger.dev/sdk`
 
-<Tabs>
-  <Tab title="Our Node.js SDK">
+If you are using our Node.js SDK, you can send events via the `sendEvent` function, like so:
 
 ```ts
 import { sendEvent } from "@trigger.dev/sdk";
@@ -23,107 +22,50 @@ await sendEvent(randomUUID(), {
 });
 ```
 
-  </Tab>
-  <Tab title="cURL">
+The first parameter is a unique ID for the event. This is used to deduplicate events, so if you send the same event twice, the second event will be ignored. You can use the `randomUUID` function from Node.js to generate a unique ID.
 
-```bash
-curl --request POST \
-  --url https://app.trigger.dev/api/v1/events \
-  --header 'Authorization: Bearer <your api key here>' \
-  --header 'Content-Type: application/json' \
-  --data '{
-            "id": "<unique event id>",
-            "event": {
-              "name": "user.created",
-              "payload": {
-                "userId": "123456"
-              }
-            }
-          }'
-```
+The second parameter is the event itself. It must have a `name` and a `payload` property. The `name` is the name of the event you want to trigger, and the `payload` is the data you want to send as the event in the `Trigger.run` function.
 
-  </Tab>
-</Tabs>
+### API Key
 
-## Sending events from other workflows
+It's not accepted as a parameter, but the `sendEvent` function will automatically use the `TRIGGER_API_KEY` environment variable as the API key. The API key determines which environment will receive the event. If you want to send events to a different environment, you can set the `TRIGGER_API_KEY` environment variable to the API key of the environment you want to send events to. See our [Environments & API Keys Guide](/guides/environments) for more info.
 
-It is useful to send events from workflows because you can split your logic into smaller chunks and reuse them. The below example shows how a scheduled workflow delegates work via sending a custom event:
+### Sending events as a step in a workflow
 
-<CodeGroup>
+You can also send events as a step in a workflow, by calling `sendEvent` inside the `Trigger.run` function, like so:
 
-```ts check-scheduler.ts
+```ts
+import { Trigger, scheduleEvent, sendEvent } from "@trigger.dev/sdk";
+
 new Trigger({
   id: "check-scheduler",
   name: "Check Scheduler",
   on: scheduleEvent({ rateOf: { minutes: 10 } }),
   run: async (event, context) => {
-    await context.sendEvent("health.check trigger.dev", {
+    await sendEvent("send-event", {
       name: "health.check",
       payload: {
         url: "https://trigger.dev",
         host: "trigger.dev",
       },
     });
-
-    await context.sendEvent("health.check docs.trigger.dev", {
-      name: "health.check",
-      payload: {
-        url: "https://docs.trigger.dev",
-        host: "docs.trigger.dev",
-      },
-    });
-
-    await context.sendEvent("health.check app.trigger.dev", {
-      name: "health.check",
-      payload: {
-        url: "https://app.trigger.dev/healthcheck",
-        host: "app.trigger.dev",
-      },
-    });
   },
 }).listen();
 ```
 
-```ts health-check.ts
-export const healthCheck = new Trigger({
-  id: "health-check",
-  name: "Health Check",
-  on: customEvent({
-    name: "health.check",
-    schema: z.object({
-      url: z.string().url(),
-      host: z.string(),
-    }),
-  }),
-  run: async (event, context) => {
-    const response = await context.fetch("fetch site", event.url, {
-      method: "GET",
-      retry: {
-        enabled: false,
-      },
-    });
+Notice that the first parameter is no longer the event ID, but rather the `key`. The key is a string that is unique across all actions in the workflow run. See our [Keys and Resumability Guide](/guides/resumability) for more info.
 
-    if (response.ok) {
-      await context.logger.info(`${event.host} is up!`);
-      return;
-    }
+<Info>In this case we will automatically generate an Event ID for you.</Info>
 
-    await slack.postMessage("Site is down", {
-      channelName: "health-checks",
-      text: `${event.host} is down: ${response.status}`,
-    });
-  },
-}).listen();
-```
+The API key will be automatically set to the API key of the environment that the workflow is running in.
 
-</CodeGroup>
+## Sending events via HTTP API
 
-<Divider />
+You can also send events via our HTTP API. We have comprehensive documentation for the `events` endpoint [here](/api-reference/events/sendEvent), but here are some examples in various languages:
 
-Notice that when calling `sendEvent` using the `context` parameter, the first
-parameter is no longer a unique ID for the event, but instead a key string
-that is unique across all actions in the workflow run. See our [Keys and
-Resumability Guide](/guides/resumability) for more info.
+<Snippet file="send-event-code-samples.mdx" />
+
+Notice that the API key is set in the `Authorization` header, which will determine which environment will receive the event. If you want to send events to a different environment, you can set the `Authorization` header to the API key of the environment you want to send events to. See our [Environments & API Keys Guide](/guides/environments) for more info.
 
 ## Delaying event delivery
 
@@ -137,7 +79,7 @@ new Trigger({
   name: "Check Scheduler",
   on: scheduleEvent({ rateOf: { minutes: 10 } }),
   run: async (event, context) => {
-    await context.sendEvent("health.check trigger.dev", {
+    await sendEvent("health.check trigger.dev", {
       name: "health.check",
       payload: {
         url: "https://trigger.dev",
@@ -146,7 +88,7 @@ new Trigger({
       delay: { until: new Date(Date.now() + 1000 * 60 * 5) }, // Delay until a specific date
     });
 
-    await context.sendEvent("health.check docs.trigger.dev", {
+    await sendEvent("health.check docs.trigger.dev", {
       name: "health.check",
       payload: {
         url: "https://docs.trigger.dev",
@@ -155,7 +97,7 @@ new Trigger({
       delay: { minutes: 5 }, // Delay for a specific amount of time
     });
 
-    await context.sendEvent("health.check app.trigger.dev", {
+    await sendEvent("health.check app.trigger.dev", {
       name: "health.check",
       payload: {
         url: "https://app.trigger.dev/healthcheck",
@@ -192,16 +134,4 @@ curl --request POST \
               }
             }
           }'
-```
-
-## Event deduplication
-
-When sending events, you can specify an `id` for the event. If you send an event with the same `id` multiple times, only the first event will be delivered. This is useful if you want to ensure that an event is only delivered once, even if you send it multiple times.
-
-```ts
-sendEvent({
-  id: "my-event-id",
-  name: "my-event",
-  payload: { foo: "bar" },
-});
 ```
