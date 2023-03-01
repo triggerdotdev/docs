@@ -149,6 +149,34 @@
       ]
     },
     {
+      "group": "Notion",
+      "pages": [
+        {
+          "group": "Actions",
+          "pages": [
+            "integrations/apis/notion/actions/get-user",
+            "integrations/apis/notion/actions/list-users",
+            "integrations/apis/notion/actions/get-bot-info",
+            "integrations/apis/notion/actions/get-page",
+            "integrations/apis/notion/actions/update-page",
+            "integrations/apis/notion/actions/create-page",
+            "integrations/apis/notion/actions/get-block",
+            "integrations/apis/notion/actions/update-block",
+            "integrations/apis/notion/actions/get-block-children",
+            "integrations/apis/notion/actions/delete-block",
+            "integrations/apis/notion/actions/append-block-children",
+            "integrations/apis/notion/actions/get-database",
+            "integrations/apis/notion/actions/query-database",
+            "integrations/apis/notion/actions/create-database",
+            "integrations/apis/notion/actions/update-database",
+            "integrations/apis/notion/actions/create-comment",
+            "integrations/apis/notion/actions/get-comments",
+            "integrations/apis/notion/actions/search"
+          ]
+        }
+      ]
+    },
+    {
       "group": "WhatsApp",
       "pages": [
         {
