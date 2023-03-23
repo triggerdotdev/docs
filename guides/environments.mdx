@@ -4,9 +4,9 @@ sidebarTitle: "Environments & API Keys"
 description: "Learn how to use environments and API keys"
 ---
 
-When you create an Organization in Trigger.dev, we will automatically create two default environments for you: `live` and `development`, each with their own API key, which you can find in the Organization sidebar:
+When you create an Organization in Trigger.dev, we will automatically create two default environments for you: `live` and `development`, each with their own API key, which you can find in the Organization "API Keys" page:
 
-![org sidebar](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/4b559572-1e9a-4eb1-7296-1520f4ae8300/public)
+![api keys page](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/823f5667-de72-4662-edc2-d211118c2300/public)
 
 You should use the `live` environment when running your workflows in production, and the `development` environment when running your workflows on your local machine. Each workflow "run" is associated with a specific environment, so a run in the `live` environment will not be visible in the `development` environment.
 
@@ -92,19 +92,17 @@ You can see this in action here in [Insomnia](https://insomnia.rest/), using our
 
 ### Scheduled
 
-At the moment, scheduled events trigger exactly the same in both the `live` and `development` environments, creating a run in each environment for every scheduled event.
+Scheduled events are disabled in the `development` environment by default, since you will rarely actually want to run a scheduled event in development. You can enable scheduled events in the `development` environment by clicking the "Enable" button in the Workflow sidebar:
 
-<Info>
-  We're going to be releasing an update soon that changes this behaviour, where
-  only the `live` environment will be triggered on a schedule, and test runs
-  will be required to trigger `development` runs.
-</Info>
+![enable environment](/images/enable-environment.gif)
 
 ## Changing Environments
 
-In the Trigger.dev dashboard, you can switch between environments using the dropdown in the top bar:
+In the Trigger.dev dashboard, you can switch between environments using the dropdown in the side bar:
 
-![changing envs](https://imagedelivery.net/3TbraffuDZ4aEf8KWOmI_w/fbd062c7-3dfe-427f-e69f-204c84828500/public)
+![changing envs](/images/switch-environments.gif)
+
+The currently selected environment is per-workflow, so you can have different workflows selected in different environments.
 
 ## Detecting the environment of a run
 
