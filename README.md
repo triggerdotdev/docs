@@ -1,3 +1,5 @@
+Note: the docs have moved to [the main repository](https://github.com/triggerdotdev/trigger.dev).
+
 # Trigger.dev Documentation
 
 This repository contains the documentation for [Trigger.dev](https://trigger.dev).
