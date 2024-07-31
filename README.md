@@ -1,16 +1,5 @@
 # Trigger.dev v2 documentation
 
-## Development
+### **Important**
 
-### Install and initial setup
-
-`pnpm install`
-
-### Running the app
-
-`pnpm run dev --filter docs`
-
-### View the app locally
-
-It runs locally here:
-`http://localhost:3050`
+These docs are just for Trigger.dev version 2. The docs for version 3 can be found [here](https://github.com/triggerdotdev/trigger.dev/tree/main/docs)
