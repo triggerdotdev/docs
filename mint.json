@@ -1,256 +1,456 @@
 {
+  "$schema": "https://mintlify.com/schema.json",
   "name": "Trigger.dev",
+  "openapi": ["/openapi.yml", "/v3-openapi.yaml"],
+  "api": {
+    "playground": {
+      "mode": "simple"
+    },
+    "maintainOrder": true
+  },
   "logo": {
-    "dark": "/logo/light.png",
+    "dark": "/logo/dark.png",
     "light": "/logo/light.png",
-    "href": "https://app.trigger.dev"
+    "href": "https://trigger.dev"
   },
   "favicon": "/images/favicon.png",
   "colors": {
-    "primary": "#0fd122",
-    "light": "#41FF54",
-    "dark": "#632CCC",
+    "primary": "#A8FF53",
+    "light": "#A8FF53",
+    "dark": "#A8FF53",
     "anchors": {
-      "from": "#069613",
-      "to": "#0fd122"
+      "from": "#252630",
+      "to": "#252630"
+    },
+    "background": {
+      "light": "#fff",
+      "dark": "#121317"
     }
   },
-  "backgroundImage": "/images/docs-background.png",
+  "theme": "quill",
   "modeToggle": {
     "default": "dark",
     "isHidden": true
   },
-  "topbarLinks": [
-    {
-      "name": "Login",
-      "url": "https://app.trigger.dev"
-    },
-    {
-      "name": "Sign up",
-      "url": "https://app.trigger.dev"
-    }
-  ],
+  "feedback": {
+    "suggestEdit": true,
+    "raiseIssue": true,
+    "thumbsRating": true
+  },
   "topbarCtaButton": {
     "type": "github",
     "url": "https://github.com/triggerdotdev/trigger.dev"
   },
-  "anchors": [
-    {
-      "name": "Integrations",
-      "icon": "grid-2",
-      "url": "integrations"
-    },
+  "topbarLinks": [
     {
       "name": "Community",
-      "icon": "discord",
-      "url": "https://discord.gg/nkqV9xBYWy"
+      "url": "https://discord.gg/kA47vcd8P6"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/documentation/quickstart",
+      "destination": "/documentation/quickstarts/introduction"
     },
     {
-      "name": "Templates",
-      "icon": "sparkles",
-      "url": "https://app.trigger.dev/templates"
+      "source": "/documentation/guides/manual",
+      "destination": "/documentation/guides/manual/nextjs"
+    },
+    {
+      "source": "/documentation/concepts/limitations",
+      "destination": "/documentation/concepts/limits"
+    },
+    {
+      "source": "/documentation/guides/create-a-job",
+      "destination": "/documentation/guides/writing-jobs-step-by-step"
+    }
+  ],
+
+  "anchors": [
+    {
+      "name": "v3 documentation",
+      "icon": "arrow-up-right-from-square",
+      "url": "https://trigger.dev/docs"
     }
   ],
   "navigation": [
     {
       "group": "Getting Started",
       "pages": [
-        "welcome",
-        "what-is-triggerdotdev",
-        "getting-started",
-        "examples/examples"
+        "documentation/introduction",
+        {
+          "group": "Quick Starts",
+          "pages": [
+            "documentation/quickstarts/introduction",
+            {
+              "group": "Frameworks",
+              "pages": [
+                "documentation/quickstarts/nextjs",
+                "documentation/quickstarts/express",
+                "documentation/quickstarts/remix",
+                "documentation/quickstarts/redwood",
+                "documentation/quickstarts/nestjs",
+                "documentation/quickstarts/astro",
+                "documentation/quickstarts/nuxt",
+                "documentation/quickstarts/sveltekit",
+                "documentation/quickstarts/hono",
+                "documentation/quickstarts/fastify"
+              ]
+            },
+            "documentation/quickstarts/supabase"
+          ]
+        },
+        "documentation/guides/writing-jobs-step-by-step",
+        "documentation/guides/task-library",
+        "documentation/guides/video-walkthrough"
       ]
     },
     {
-      "group": "Triggers",
+      "group": "Concepts",
       "pages": [
-        "triggers/webhooks",
-        "triggers/custom-events",
-        "triggers/scheduled"
-      ]
-    },
-    {
-      "group": "Functions",
-      "pages": [
-        "functions/fetch",
-        "functions/logging",
-        "functions/delays",
-        "functions/send-event",
-        "functions/run-once",
-        "functions/loops-conditionals-etc"
+        "documentation/concepts/what-is-triggerdotdev",
+        "documentation/concepts/limits",
+        "documentation/concepts/projects",
+        "documentation/concepts/client-adaptors",
+        {
+          "group": "Jobs, Runs & Tasks",
+          "pages": [
+            "documentation/concepts/jobs",
+            "documentation/concepts/runs",
+            "documentation/concepts/tasks"
+          ]
+        },
+        {
+          "group": "Triggers",
+          "pages": [
+            "documentation/concepts/triggers/introduction",
+            "documentation/concepts/triggers/invoke",
+            "documentation/concepts/triggers/events",
+            "documentation/concepts/triggers/scheduled",
+            "documentation/concepts/triggers/http",
+            "documentation/concepts/triggers/webhooks",
+            "documentation/concepts/triggers/dynamic"
+          ]
+        },
+        "documentation/concepts/http-endpoints",
+        "documentation/concepts/resumability",
+        "documentation/concepts/delays",
+        "documentation/concepts/integrations",
+        "documentation/concepts/connect",
+        "documentation/concepts/environments-endpoints"
       ]
     },
     {
       "group": "Guides",
       "pages": [
-        "guides/using-integrations",
-        "guides/environments",
-        "guides/running-tests",
-        "guides/deployment",
-        "guides/resumability",
-        "guides/event-filters",
-        "guides/zod"
+        {
+          "group": "Frameworks",
+          "pages": [
+            "documentation/guides/platforms/nextjs",
+            "documentation/guides/platforms/express",
+            "documentation/guides/platforms/remix",
+            "documentation/guides/platforms/redwood",
+            "documentation/guides/platforms/astro",
+            "documentation/guides/platforms/nuxt",
+            "documentation/guides/platforms/sveltekit",
+            "documentation/guides/platforms/fastify"
+          ]
+        },
+        "documentation/guides/cli",
+        {
+          "group": "Manual setup",
+          "pages": [
+            "documentation/guides/manual/nextjs",
+            "documentation/guides/manual/nestjs",
+            "documentation/guides/manual/express",
+            "documentation/guides/manual/remix",
+            "documentation/guides/manual/redwood",
+            "documentation/guides/manual/astro",
+            "documentation/guides/manual/nuxt",
+            "documentation/guides/manual/sveltekit",
+            "documentation/guides/manual/fastify"
+          ]
+        },
+        "documentation/guides/running-jobs",
+        "documentation/guides/jobs/managing",
+        {
+          "group": "Using the Dashboard",
+          "pages": [
+            "documentation/guides/managing-jobs",
+            "documentation/guides/viewing-runs",
+            "documentation/guides/testing-jobs",
+            "documentation/guides/rerunning"
+          ]
+        },
+        {
+          "group": "Using Integrations",
+          "pages": [
+            "documentation/guides/using-integrations",
+            "documentation/guides/using-integrations-apikeys",
+            "documentation/guides/using-integrations-oauth",
+            "documentation/guides/using-integrations-byo-auth"
+          ]
+        },
+        {
+          "group": "React hooks",
+          "pages": [
+            "documentation/guides/react-hooks",
+            "documentation/guides/react-hooks-automatic",
+            "documentation/guides/react-hooks-statuses"
+          ]
+        },
+        {
+          "group": "Deployment",
+          "pages": [
+            "documentation/guides/deployment",
+            "documentation/guides/deployment-setup",
+            "documentation/guides/deployment-manual",
+            "documentation/guides/deployment-automatic"
+          ]
+        },
+        "documentation/guides/event-filter",
+        "documentation/guides/zod",
+        {
+          "group": "Self hosting",
+          "pages": [
+            "documentation/guides/self-hosting",
+            "documentation/guides/self-hosting/flyio",
+            "documentation/guides/self-hosting/render",
+            "documentation/guides/self-hosting/kubernetes",
+            "documentation/guides/self-hosting/supabase",
+            "documentation/guides/tunneling-platform"
+          ]
+        },
+        "documentation/guides/contributing"
       ]
-    },
-    {
-      "group": "SDK Reference",
-      "pages": [
-        "reference/trigger",
-        "reference/custom-event",
-        "reference/webhook-event",
-        "reference/schedule-event",
-        "reference/send-event"
-      ]
-    },
-    {
-      "group": "API Reference",
-      "pages": ["api-reference/events/sendEvent"]
     },
     {
       "group": "Community & Support",
-      "pages": ["get-help", "faq", "changelog", "roadmap"]
+      "pages": [
+        "documentation/get-help",
+        "documentation/faq",
+        "documentation/changelog",
+        "documentation/roadmap"
+      ]
     },
     {
-      "group": "Slack",
+      "group": "Overview",
+      "pages": [
+        "integrations/introduction",
+        {
+          "group": "Create an Integration",
+          "pages": [
+            "integrations/create",
+            "integrations/create-setup",
+            "integrations/create-anatomy",
+            "integrations/create-oauth",
+            "integrations/create-client",
+            "integrations/create-tasks",
+            "integrations/create-triggers",
+            "integrations/create-testing",
+            "integrations/create-publishing"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Integrations",
       "pages": [
         {
-          "group": "Actions",
+          "group": "Airtable",
           "pages": [
-            "integrations/apis/slack/actions/post-message",
-            "integrations/apis/slack/actions/post-message-response",
-            "integrations/apis/slack/actions/add-reaction",
-            "integrations/apis/slack/actions/open-view"
+            "integrations/apis/airtable",
+            "integrations/apis/airtable-tasks"
           ]
         },
         {
-          "group": "Webhooks",
+          "group": "GitHub",
           "pages": [
-            "integrations/apis/slack/events/block-action-interaction",
-            "integrations/apis/slack/events/view-submission-interaction"
+            "integrations/apis/github",
+            "integrations/apis/github-triggers",
+            "integrations/apis/github-tasks"
           ]
-        }
-      ]
-    },
-    {
-      "group": "GitHub",
-      "pages": [
+        },
+        "integrations/apis/linear",
         {
-          "group": "Webhooks",
+          "group": "OpenAI",
           "pages": [
-            "integrations/apis/github/events/issue-comments",
-            "integrations/apis/github/events/issues",
-            "integrations/apis/github/events/new-star",
-            "integrations/apis/github/events/pull-request-comments",
-            "integrations/apis/github/events/pull-request-reviews",
-            "integrations/apis/github/events/pull-requests",
-            "integrations/apis/github/events/push"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Notion",
-      "pages": [
-        {
-          "group": "Actions",
-          "pages": [
-            "integrations/apis/notion/actions/get-user",
-            "integrations/apis/notion/actions/list-users",
-            "integrations/apis/notion/actions/get-bot-info",
-            "integrations/apis/notion/actions/get-page",
-            "integrations/apis/notion/actions/update-page",
-            "integrations/apis/notion/actions/create-page",
-            "integrations/apis/notion/actions/get-block",
-            "integrations/apis/notion/actions/update-block",
-            "integrations/apis/notion/actions/get-block-children",
-            "integrations/apis/notion/actions/delete-block",
-            "integrations/apis/notion/actions/append-block-children",
-            "integrations/apis/notion/actions/get-database",
-            "integrations/apis/notion/actions/query-database",
-            "integrations/apis/notion/actions/create-database",
-            "integrations/apis/notion/actions/update-database",
-            "integrations/apis/notion/actions/create-comment",
-            "integrations/apis/notion/actions/get-comments",
-            "integrations/apis/notion/actions/search"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "WhatsApp",
-      "pages": [
-        {
-          "group": "Actions",
-          "pages": [
-            "integrations/apis/whatsapp/actions/text-message",
-            "integrations/apis/whatsapp/actions/reaction-message",
-            "integrations/apis/whatsapp/actions/audio-message",
-            "integrations/apis/whatsapp/actions/video-message",
-            "integrations/apis/whatsapp/actions/document-message",
-            "integrations/apis/whatsapp/actions/sticker-message",
-            "integrations/apis/whatsapp/actions/template-message",
-            "integrations/apis/whatsapp/actions/location-message",
-            "integrations/apis/whatsapp/actions/contacts-message"
+            "integrations/apis/openai",
+            "integrations/apis/openai/chat",
+            "integrations/apis/openai/assistants",
+            "integrations/apis/openai/files",
+            "integrations/apis/openai/images",
+            "integrations/apis/openai/fine-tunes",
+            "integrations/apis/openai/models",
+            "integrations/apis/openai/completions"
           ]
         },
         {
-          "group": "Webhooks",
-          "pages": ["integrations/apis/whatsapp/events/message"]
-        }
-      ]
-    },
-    {
-      "group": "Resend.com",
-      "pages": [
+          "group": "Plain",
+          "pages": ["integrations/apis/plain", "integrations/apis/plain-tasks"]
+        },
+        "integrations/apis/replicate",
         {
-          "group": "Actions",
-          "pages": ["integrations/apis/resend/actions/send-email"]
-        }
-      ]
-    },
-    {
-      "group": "Airtable",
-      "pages": [
-        {
-          "group": "Actions",
+          "group": "SendGrid",
           "pages": [
-            "integrations/apis/airtable/actions/list-records",
-            "integrations/apis/airtable/actions/get-record",
-            "integrations/apis/airtable/actions/create-records",
-            "integrations/apis/airtable/actions/update-record",
-            "integrations/apis/airtable/actions/update-records",
-            "integrations/apis/airtable/actions/delete-record",
-            "integrations/apis/airtable/actions/delete-records"
+            "integrations/apis/sendgrid",
+            "integrations/apis/sendgrid-tasks"
           ]
-        }
+        },
+        {
+          "group": "Resend",
+          "pages": [
+            "integrations/apis/resend",
+            "integrations/apis/resend-tasks"
+          ]
+        },
+        {
+          "group": "Shopify",
+          "pages": [
+            "integrations/apis/shopify",
+            "integrations/apis/shopify-triggers",
+            "integrations/apis/shopify-tasks"
+          ]
+        },
+        {
+          "group": "Slack",
+          "pages": ["integrations/apis/slack", "integrations/apis/slack-tasks"]
+        },
+        "integrations/apis/stripe",
+        {
+          "group": "Supabase",
+          "pages": [
+            "integrations/apis/supabase/introduction",
+            "integrations/apis/supabase/management",
+            "integrations/apis/supabase/client"
+          ]
+        },
+        "integrations/apis/typeform"
       ]
     },
     {
-      "group": "Sendgrid",
+      "group": "SDK",
       "pages": [
+        "sdk/introduction",
         {
-          "group": "Actions",
+          "group": "TriggerClient",
           "pages": [
-            "integrations/apis/sendgrid/actions/mail-send",
-            "integrations/apis/sendgrid/actions/marketing-contacts"
+            "sdk/triggerclient/overview",
+            "sdk/triggerclient/constructor",
+            {
+              "group": "Instance properties",
+              "pages": ["sdk/triggerclient/store"]
+            },
+            {
+              "group": "Instance methods",
+              "pages": [
+                "sdk/triggerclient/instancemethods/sendevent",
+                "sdk/triggerclient/instancemethods/sendevents",
+                "sdk/triggerclient/instancemethods/getevent",
+                "sdk/triggerclient/instancemethods/cancel-event",
+                "sdk/triggerclient/instancemethods/cancel-runs-for-event",
+                "sdk/triggerclient/instancemethods/cancel-runs-for-job",
+                "sdk/triggerclient/instancemethods/getruns",
+                "sdk/triggerclient/instancemethods/getrun",
+                "sdk/triggerclient/instancemethods/define-job",
+                "sdk/triggerclient/instancemethods/define-http-endpoint",
+                "sdk/triggerclient/instancemethods/define-dynamic-trigger",
+                "sdk/triggerclient/instancemethods/define-dynamic-schedule",
+                "sdk/triggerclient/instancemethods/define-auth-resolver",
+                "sdk/triggerclient/instancemethods/concurrency-limit",
+                "sdk/triggerclient/instancemethods/on"
+              ]
+            }
           ]
-        }
+        },
+        "sdk/job",
+        {
+          "group": "IO",
+          "pages": [
+            "sdk/io/overview",
+            "sdk/io/runtask",
+            "sdk/io/sendevent",
+            "sdk/io/sendevents",
+            "sdk/io/store",
+            "sdk/io/wait",
+            "sdk/io/wait-for-event",
+            "sdk/io/wait-for-request",
+            "sdk/io/backgroundfetch",
+            "sdk/io/background-poll",
+            "sdk/io/random",
+            "sdk/io/logger",
+            "sdk/io/try",
+            "sdk/io/registerinterval",
+            "sdk/io/unregisterinterval",
+            "sdk/io/registercron",
+            "sdk/io/unregistercron",
+            "sdk/io/registertrigger"
+          ]
+        },
+        "sdk/context",
+        "sdk/run-notification",
+        "sdk/invoke-trigger",
+        "sdk/eventtrigger",
+        "sdk/crontrigger",
+        "sdk/intervaltrigger",
+        "sdk/http-endpoint",
+        "sdk/http-trigger",
+        {
+          "group": "DynamicTrigger",
+          "pages": [
+            "sdk/dynamictrigger/overview",
+            "sdk/dynamictrigger/constructor",
+            {
+              "group": "Instance methods",
+              "pages": [
+                "sdk/dynamictrigger/register",
+                "sdk/dynamictrigger/unregister"
+              ]
+            }
+          ]
+        },
+        {
+          "group": "DynamicSchedule",
+          "pages": [
+            "sdk/dynamicschedule/overview",
+            "sdk/dynamicschedule/constructor",
+            {
+              "group": "Instance methods",
+              "pages": [
+                "sdk/dynamicschedule/register",
+                "sdk/dynamicschedule/unregister"
+              ]
+            }
+          ]
+        },
+        "sdk/connection-auth",
+        "sdk/istriggererror",
+        "sdk/redactstring",
+        "sdk/verify-request-signature"
       ]
+    },
+    {
+      "group": "HTTP Reference",
+      "pages": ["sdk/api-reference/events/create-an-event"]
+    },
+    {
+      "group": "React SDK",
+      "pages": [
+        "sdk/react/introduction",
+        "sdk/react/triggerprovider",
+        "sdk/react/useeventdetails",
+        "sdk/react/useeventrundetails",
+        "sdk/react/userundetails"
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": ["examples/introduction"]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/triggerdotdev",
-    "github": "https://github.com/triggerdotdev/trigger.dev",
-    "discord": "https://discord.gg/nkqV9xBYWy"
-  },
-  "api": {
-    "auth": {
-      "method": "bearer"
-    }
-  },
-  "analytics": {
-    "posthog": {
-      "apiKey": "phc_cU8Ow5tDcy9alp09yWYpad98CHafOsfsXK3HzLM6uy0"
-    }
+    "github": "https://github.com/triggerdotdev",
+    "linkedin": "https://www.linkedin.com/company/triggerdotdev"
   }
 }
