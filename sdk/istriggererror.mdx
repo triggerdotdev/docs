@@ -3,6 +3,8 @@ title: "isTriggerError()"
 description: "Use this function if you're using a `try/catch` block to catch errors."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 A regular `try/catch` block on its own won't work as expected with Tasks. Internally `runTask()` throws some special errors to control flow execution. This is necessary to deal with resumability, serverless timeouts, and retrying Tasks.
 
 If this function returns `true` you must rethrow the error. If it returns `false` you can handle the error as you normally would.

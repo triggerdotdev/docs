@@ -4,6 +4,8 @@ sidebarTitle: "sendEvents()"
 description: "`io.sendEvents()` allows you to send multiple events from inside a Job run. The sent events will trigger any Jobs that are listening for those events (based on the name)."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 If you want to send multiple events from outside a run (e.g. just from your backend) you should use [client.sendEvents()](/sdk/triggerclient/instancemethods/sendevents) instead.
 
 Use [eventTrigger()](/sdk/eventtrigger) on a Job to listen for events.

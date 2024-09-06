@@ -4,6 +4,8 @@ sidebarTitle: "cancelEvent()"
 description: "The `cancelEvent()` instance method will cancel an event that is scheduled to be delivered in the future."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 If you've scheduled an event to be delivered in the future, you can cancel it using the `cancelEvent()` instance method, passing in the ID of the event you want to cancel. This will prevent any jobs listening for that event from being triggered.
 
 ```ts

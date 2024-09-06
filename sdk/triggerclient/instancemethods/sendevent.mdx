@@ -4,6 +4,8 @@ sidebarTitle: "sendEvent()"
 description: "The `sendEvent()` instance method send an event that triggers any Jobs that are listening for that event (based on the name)."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 You can call this function from anywhere in your backend to send an event. The other way to send an event is by using [io.sendEvent()](/sdk/io/sendevent) from inside a `run()` function.
 
 Use [eventTrigger()](/sdk/eventtrigger) on a Job to listen for events.

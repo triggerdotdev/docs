@@ -4,6 +4,8 @@ sidebarTitle: "try()"
 description: "`io.try()` allows you to run Tasks and catch any errors that are thrown, it's similar to a normal `try/catch` block but works with [io.runTask()](/sdk/io/runtask)."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 A regular `try/catch` block on its own won't work as expected with Tasks. Internally `runTask()` throws some special errors to control flow execution. This is necessary to deal with resumability, serverless timeouts, and retrying Tasks.
 
 ## How to `catch` errors inside `run()`

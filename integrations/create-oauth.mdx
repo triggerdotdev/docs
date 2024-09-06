@@ -3,6 +3,8 @@ title: OAuth
 description: "OAuth is used to authenticate users by passing them to a third-party service, such as Google or Facebook, to log in."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 OAuth is the one part of creating an integration that requires new code to be deployed to the [Trigger.dev platform](https://github.com/triggerdotdev/trigger.dev).
 
 This is required because users need to be routed to the third-party service to log in, and then back to Trigger.dev once they have authenticated. Their credentials are stored (encrypted at rest) in the Trigger.dev database and automatically refreshed before they expire.

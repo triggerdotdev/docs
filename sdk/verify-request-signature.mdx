@@ -3,6 +3,8 @@ title: "verifyRequestSignature()"
 description: "Verify webhook payloads when they're using common signing methods."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 Most webhooks come with a signature in the request header. This signature is used to verify that the request is coming from the expected source. To verify you typically need to take the body of the payload, hash it and compare it with the signature in the header. You use a secret when you hash the payload to make sure that the payload hasn't been tampered with.
 
 When using [HttpEndpoint](/sdk/http-endpoint) you are required to verify the payload. `verifyRequestSignature()` is a helper function that makes this easy for the majority of webhooks.

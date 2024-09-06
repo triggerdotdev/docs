@@ -4,6 +4,8 @@ sidebarTitle: "sendEvents()"
 description: "The `sendEvents()` instance method send multiple events that triggers any Jobs that are listening for those events (based on the name)."
 ---
 
+<Snippet file="v2-deprecation-warning.mdx" />
+
 You can call this function from anywhere in your backend to send multiple events. The other way to send multiple events is by using [io.sendEvents()](/sdk/io/sendevents) from inside a `run()` function.
 
 Use [eventTrigger()](/sdk/eventtrigger) on a Job to listen for events.
