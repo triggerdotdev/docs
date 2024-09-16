@@ -43,6 +43,10 @@
   },
   "topbarLinks": [
     {
+      "name": "Switch to v3 docs",
+      "url": "https://trigger.dev/docs"
+    },
+    {
       "name": "Community",
       "url": "https://discord.gg/kA47vcd8P6"
     }
